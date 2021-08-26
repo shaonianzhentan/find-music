@@ -1,5 +1,8 @@
 # find-music
-查询音乐链接服务
+
+专为HomeAssistant云音乐插件设计，主要是由于版权原因，这也听不了，那也听不了。
+
+所以这个服务可以通过音乐名称查找到对应的音乐链接
 
 ---
 
@@ -15,3 +18,7 @@ pm2 restart findmusic
 # 查看日志
 pm2 logs findmusic
 ```
+
+## License
+
+MIT
