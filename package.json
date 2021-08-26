@@ -1,0 +1,28 @@
+{
+  "name": "find-music",
+  "version": "1.0.0",
+  "description": "查询音乐链接服务",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shaonianzhentan/find-music.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/shaonianzhentan/find-music/issues"
+  },
+  "homepage": "https://github.com/shaonianzhentan/find-music#readme",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "koa": "^2.13.1",
+    "koa-body": "^4.2.0",
+    "koa-router": "^10.1.1",
+    "koa2-swagger-ui": "^5.2.0",
+    "swagger-jsdoc": "^6.1.0",
+    "yamljs": "^0.3.0"
+  }
+}
