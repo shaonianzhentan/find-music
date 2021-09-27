@@ -9,6 +9,16 @@
 使用pm2启动管理
 
 ```bash
+
+# clone项目
+git clone https://github.com.cnpmjs.org/shaonianzhentan/find-music
+
+# 进入项目
+cd find-music
+
+# 安装依赖
+npm i
+
 # 启动
 pm2 start index.js --name findmusic
 
