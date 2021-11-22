@@ -81,6 +81,9 @@ router.post('/xmly', async (ctx) => {
  */
 router.get('/search', async (ctx) => {
     const { key } = ctx.query
+    if (!key) {
+        return ctx.body = { code: 1, msg: '请输入关键词' }
+    }
     let data = await qqmusic(key)
     if (data) {
         return ctx.body = { code: 0, data, msg: '在QQ音乐中找到' }
@@ -102,6 +105,32 @@ router.get('/search', async (ctx) => {
     }
 
     ctx.body = { code: 1, msg: '找不到音乐' }
+})
+
+router.get('/url', async (ctx) => {
+    const { key } = ctx.query
+    if (!key) {
+        return ctx.body = { code: 1, msg: '请输入关键词' }
+    }
+    let data = await qqmusic(key)
+    if (data) {
+        return ctx.response.redirect(data.purl);
+    }
+
+    data = await migu(key)
+    if (data) {
+        return ctx.response.redirect(data.purl);
+    }
+
+    data = await kugou(key)
+    if (data) {
+        return ctx.response.redirect(data.purl);
+    }
+
+    data = await kuwo(key)
+    if (data) {
+        return ctx.response.redirect(data.purl);
+    }
 })
 
 module.exports = router
