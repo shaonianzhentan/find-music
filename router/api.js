@@ -107,8 +107,26 @@ router.get('/search', async (ctx) => {
     ctx.body = { code: 1, msg: '找不到音乐' }
 })
 
+/**
+ * @swagger
+ * /api/url:
+ *   get:
+ *     summary: 搜索音乐资源
+ *     description: 根据关键词搜索对应的音频资源（QQ音乐、咪咕、酷狗、酷我）
+ *     tags:
+ *       - API
+ *     parameters:
+ *       - name: key
+ *         in: query
+ *         required: true
+ *         description: 歌名
+ *         type: string
+ *     responses:
+ *       301:
+ *         description: 成功获取
+ */
 router.get('/url', async (ctx) => {
-    const { key } = ctx.query
+    const { key, source } = ctx.query
     if (!key) {
         return ctx.body = { code: 1, msg: '请输入关键词' }
     }
