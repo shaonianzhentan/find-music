@@ -8,6 +8,7 @@ const qqmusic = require('../lib/qqmusic')
 const migu = require('../lib/migu')
 const kugou = require('../lib/kugou')
 const kuwo = require('../lib/kuwo')
+const netease = require('../lib/netease')
 
 /**
  * @swagger
@@ -92,6 +93,11 @@ router.get('/search', async (ctx) => {
     data = await migu(key)
     if (data) {
         return ctx.body = { code: 0, data, msg: '在咪咕音乐中找到' }
+    }
+
+    data = await netease(key)
+    if (data) {
+        return ctx.body = { code: 0, data, msg: '在网易云音乐中找到' }
     }
 
     data = await kugou(key)

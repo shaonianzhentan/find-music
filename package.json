@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/shaonianzhentan/find-music#readme",
   "dependencies": {
+    "NeteaseCloudMusicApi": "^4.2.0",
     "axios": "^0.21.1",
     "koa": "^2.13.1",
     "koa-body": "^4.2.0",
