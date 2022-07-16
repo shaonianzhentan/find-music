@@ -8,6 +8,7 @@ const qqmusic = require('../lib/qqmusic')
 const migu = require('../lib/migu')
 const kugou = require('../lib/kugou')
 const kuwo = require('../lib/kuwo')
+const netease = require('../lib/netease')
 
 /**
  * @swagger
@@ -81,6 +82,9 @@ router.post('/xmly', async (ctx) => {
  */
 router.get('/search', async (ctx) => {
     const { key } = ctx.query
+    if (!key) {
+        return ctx.body = { code: 1, msg: '请输入关键词' }
+    }
     let data = await qqmusic(key)
     if (data) {
         return ctx.body = { code: 0, data, msg: '在QQ音乐中找到' }
@@ -89,6 +93,11 @@ router.get('/search', async (ctx) => {
     data = await migu(key)
     if (data) {
         return ctx.body = { code: 0, data, msg: '在咪咕音乐中找到' }
+    }
+
+    data = await netease(key)
+    if (data) {
+        return ctx.body = { code: 0, data, msg: '在网易云音乐中找到' }
     }
 
     data = await kugou(key)
@@ -102,6 +111,50 @@ router.get('/search', async (ctx) => {
     }
 
     ctx.body = { code: 1, msg: '找不到音乐' }
+})
+
+/**
+ * @swagger
+ * /api/url:
+ *   get:
+ *     summary: 搜索音乐资源
+ *     description: 根据关键词搜索对应的音频资源（QQ音乐、咪咕、酷狗、酷我）
+ *     tags:
+ *       - API
+ *     parameters:
+ *       - name: key
+ *         in: query
+ *         required: true
+ *         description: 歌名
+ *         type: string
+ *     responses:
+ *       301:
+ *         description: 成功获取
+ */
+router.get('/url', async (ctx) => {
+    const { key, source } = ctx.query
+    if (!key) {
+        return ctx.body = { code: 1, msg: '请输入关键词' }
+    }
+    let data = await qqmusic(key)
+    if (data) {
+        return ctx.response.redirect(data.purl);
+    }
+
+    data = await migu(key)
+    if (data) {
+        return ctx.response.redirect(data.purl);
+    }
+
+    data = await kugou(key)
+    if (data) {
+        return ctx.response.redirect(data.purl);
+    }
+
+    data = await kuwo(key)
+    if (data) {
+        return ctx.response.redirect(data.purl);
+    }
 })
 
 module.exports = router
